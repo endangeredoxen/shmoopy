@@ -110,8 +110,8 @@ ENV/
 # mypy
 .mypy_cache/
 .idea/workspace.xml
-fivecentplots/__pycache__/__init__.cpython-35.pyc
-fivecentplots/__pycache__/fcp.cpython-35.pyc
+shmoopy/__pycache__/__init__.cpython-35.pyc
+shmoopy/__pycache__/fcp.cpython-35.pyc
 
 #pytest
 .pytest_cache
@@ -119,14 +119,8 @@ fivecentplots/__pycache__/fcp.cpython-35.pyc
 
 # image files
 # *.png
-fivecentplots/*.png
-!fivecentplots/*.png/
-fivecentplots/tests/*.png
-!fivecentplots/tests/*.png/
-fivecentplots/tests/test.png
 
 #specific files
-difference.png
 
 # other
 .vscode/settings.json

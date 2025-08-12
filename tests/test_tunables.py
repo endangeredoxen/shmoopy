@@ -6,8 +6,8 @@ from pathlib import Path
 
 
 CUR_DIR = Path(__file__).parent.absolute()
-DATA = 'data/tunable_load_array.txt'
-DATA_BAD = 'data/tunable_load_array_bad.txt'
+DATA = 'data/tunable_load_array.arr'
+DATA_BAD = 'data/tunable_load_array_bad.arr'
 BAD_PATH = 'Users/dave/test.txt'
 
 

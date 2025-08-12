@@ -1,8 +1,5 @@
-from typing import Any, Dict, List, Union
-from pathlib import Path
-import numpy as np
+from typing import Callable, Optional
 import warnings
-import inspect
 import functools
 import pdb
 
@@ -16,22 +13,29 @@ class MetricError(Exception):
         Exception.__init__(self, *args, **kwargs)
 
 
-def metric(values: Dict[Any]):
+def metric(func: Optional[Callable] = None, *, validate: bool = True):
     """
-    Ensure a tunable value is contained in a list of allowed values
+    Decorator for metric functions
 
     Args:
-        values: list of allowed choices for the tunable parameter
-
-    Returns:
-        a validated value to use in a shmoo test case
+        func: The function being decorated (when used without parentheses)
+        validate: Whether to perform additional validation
     """
-    def decorator(func):
+    def decorator(func: Callable):
+        @functools.wraps(func)
         def wrapper(*args, **kwargs):
             try:
-                return func(*args, **kwargs)
+                result = func(*args, **kwargs)
+                return result
             except Exception as e:
                 raise MetricError(f'Error calculating metric "{func.__name__}": {str(e)}')
         wrapper._metric = True
         return wrapper
-    return decorator
+
+    # Handle both @metric and @metric() usage
+    if func is not None:
+        # Direct usage: @metric
+        return decorator(func)
+    else:
+        # Called usage: @metric() or @metric(validate=False)
+        return decorator

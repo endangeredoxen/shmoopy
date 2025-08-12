@@ -7,7 +7,7 @@ import functools
 import pdb
 
 db = pdb.set_trace
-warnings.simplefilter('always', UserWarning)
+warnings.simplefilter('once', UserWarning)
 
 
 class TunableError(Exception):
@@ -17,10 +17,12 @@ class TunableError(Exception):
 
 
 def _handle_defaults(args, kwargs, func):
-    #if 'value' in kwargs:
-    #    value = kwargs['value']
-    if args:
-        value = args[0]  # Assuming 'value' is the first positional argument
+    # Check for "self"
+    is_default = False
+    if len(args) == 2 and hasattr(args[0], '__class__'):
+        value = args[1]
+    elif len(args) == 1 and not hasattr(args[0], '__class__'):
+        value = args[0]
     else:
         # Get the default value from the decorated function's signature
         sig = inspect.signature(func)
@@ -28,7 +30,8 @@ def _handle_defaults(args, kwargs, func):
             value = sig.parameters['value'].default
         else:
             raise TunableError('Tunable validation function requires a "value"')
-    return value
+        is_default = True
+    return value, is_default
 
 
 def _validate_path(value, func_name):
@@ -55,7 +58,10 @@ def tunable_load_array(func=None, *, dtype=None):
     def decorator(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            value = _handle_defaults(args, kwargs, func)
+            value, is_default = _handle_defaults(args, kwargs, func)
+            if is_default:
+                # ignore path check and just use default
+                return value
             fname = func.__name__
             fpath = _validate_path(value, fname)
             if not fpath.is_file():
@@ -82,7 +88,10 @@ def tunable_path(func):
         a validated fpath to use in a shmoo test case
     """
     def wrapper(*args, **kwargs):
-        value = _handle_defaults(args, kwargs, func)
+        value, is_default = _handle_defaults(args, kwargs, func)
+        if isinstance(value, float) and np.isnan(value):
+            # ignore nan
+            return value
         fname = func.__name__
         return _validate_path(value, fname)
     wrapper._tunable = True
@@ -102,7 +111,10 @@ def tunable_range(min_value: Union[int, float, None], max_value: Union[int, floa
     """
     def decorator(func):
         def wrapper(*args, **kwargs):
-            value = _handle_defaults(args, kwargs, func)
+            value, is_default = _handle_defaults(args, kwargs, func)
+            if isinstance(value, float) and np.isnan(value):
+                # ignore nan
+                return value
             fname = func.__name__
             if min_value is None and max_value is None:
                 warnings.warn(f'Tunable range for "{fname}" lacks a min or a max and is thus pointless')
@@ -130,12 +142,12 @@ def tunable_values(values: List[Any]):
     """
     def decorator(func):
         def wrapper(*args, **kwargs):
-            value = _handle_defaults(args, kwargs, func)
+            value, is_default = _handle_defaults(args, kwargs, func)
             fname = func.__name__
             if value not in values:
                 valid = [f"'{item}'" if isinstance(item, str) else str(item) for item in values]
                 raise TunableError(f'Value of "{value}" is not allowed for tunable "{fname}"; allowed options '
-                                          f'are: [{", ".join(valid)}]')
+                                   f'are: [{", ".join(valid)}]')
             return func(*args, **kwargs)
         wrapper._tunable = True
         return wrapper

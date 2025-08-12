@@ -1,10 +1,12 @@
 import cv2
 from shmoopy.tunables import *
+from shmoopy.metrics import metric
+from typing import Dict, Any
 
 
 class ToneMapShmoo:
-    def __init__(self):
-        self.data = "Dummy data for testing"
+    def __init__(self, save_images=False):
+        self.save_images = save_images
 
     @tunable_values(['drago', 'reinhard', 'mantiuk'])
     def algorithm(self, value='drago'):
@@ -32,8 +34,8 @@ class ToneMapShmoo:
         """
         return value
 
-    @tunable_load_array
-    def gamma(self, value):
+    @tunable_range(None, None)
+    def gamma(self, value=1):
         """
         Used in all algorithms; gamma value for gamma correction
         """
@@ -63,11 +65,58 @@ class ToneMapShmoo:
         """
         return value
 
-    #@metric
-    def stats(self):
-        pass
+    @metric
+    def stats(self, values: Dict[str, Any]) -> Dict[str, float]:
+        """
+        Calculate image statistics for the LDR output
+        """
+        return {
+            'mean': np.mean(values['image_output']),
+            'std': np.std(values['image_output']),
+            'min': np.min(values['image_output']),
+            'max': np.max(values['image_output'])
+        }
 
-    def process(self):
-        return f"Processed: {self.data}"
+    def _get_image(self, row) -> np.ndarray:
+        """
+        Load the input HDR image from the specified source
+
+        Args:
+            row: DataFrame row containing the image source path
+
+        Returns:
+            Loaded image as a numpy array
+        """
+        return cv2.imread(row.image_src, cv2.IMREAD_UNCHANGED)
+
+    def run(self, irow, row) -> Dict[str, Any]:
+        """
+        Main execution block for this shmoo
+        """
+        # Load the test image
+        image_input = self._get_image(row)
+
+        # Apply the tone mapping algorithm
+        if row.algorithm == 'drago':
+            tonemap = cv2.createTonemapDrago(bias=row.bias, saturation=row.saturation)
+        elif row.algorithm == 'reinhard':
+            tonemap = cv2.createTonemapReinhard(color_adapt=row.color_adapt, intensity=row.intensity, gamma=row.gamma)
+        else:
+            tonemap = cv2.createTonemapMantiuk(scale=row.scale, gamma=row.gamma)
+
+        # Apply the tonemap to the image
+        ldr = tonemap.process(image_input)
+
+        # Convert to 8-bit image for display
+        image_output = np.clip(ldr * 255, 0, 255).astype('uint8')
+
+        # Save the output image if required
+        if self.save_images:
+            ##UPDATE TO ROW NUMBER
+            output_path = row['image_src'].with_suffix('.tonemapped.jpg')
+            cv2.imwrite(str(output_path), image_output)
+
+        # Return all local variables for metric calculations
+        return locals()
 
 

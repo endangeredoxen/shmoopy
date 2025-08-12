@@ -1,4 +1,4 @@
 algorithm,bias,color_adapt,intensity,gamma,light_adapt,saturation,scale,image_src
-drago,0.85,,,0,,1.0,,/path/to/image.jpg
-reinhard,,0.1,0.5,0.1,1,,,/path/to/image2.jpg
-mantiuk,,,,0.2,,1.2,0.7,/path/to/image3.jpg
+drago,0.2:1:10,,,0,,1.0,,/Users/steve/Code/shmoopy/tests/data/cobblestone_street_night_1k.hdr
+reinhard,,0.1,0.5,0.1,1,,,/Users/steve/Code/shmoopy/tests/data/cobblestone_street_night_1k.hdr
+mantiuk,,,,0.2,,1.2,/Users/steve/Code/shmoopy/tests/data/scale_array.arr,/Users/steve/Code/shmoopy/tests/data/cobblestone_street_night_1k.hdr
