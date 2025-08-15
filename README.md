@@ -1,6 +1,6 @@
 <div style="display:flex; align-items:center;">
     <h1>shmoopy</h1>
-    <img src="doc/_static/images/shmoo_flipped.png" alt="shmoo" style="max-width:40px; padding-left:20px;">
+    <img src="doc/_static/images/shmoo_flipped.png" alt="shmoo" style="width:80px; padding-left:20px;">
 </div>
 
 Obscured from the modern memory by the incessant, boisterous onslaught of the Marvel Cinematic and DC Extended Universes, is another 1940s comic book hero, conceived with the primary objective of fulfilling all of humanity's wants and needs:  Al Capp's "The Shmoo".   
