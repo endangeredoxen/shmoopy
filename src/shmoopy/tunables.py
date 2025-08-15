@@ -1,19 +1,27 @@
 from typing import Any, List, Union
 from pathlib import Path
 import numpy as np
+import shmoopy
 import warnings
 import inspect
 import functools
 import pdb
+import os
 
 db = pdb.set_trace
-warnings.simplefilter('once', UserWarning)
 
 
 class TunableError(Exception):
     def __init__(self, *args, **kwargs):
         """Tunable validation error."""
         Exception.__init__(self, *args, **kwargs)
+
+
+class TunableWarning(Warning):
+    pass
+
+
+warnings.simplefilter('once', TunableWarning)
 
 
 def _handle_defaults(args, kwargs, func):
@@ -43,9 +51,22 @@ def _validate_path(value, func_name):
     else:
         raise TunableError(f'Value for tunable "{func_name}" must be a string or pathlib.Path')
 
-    if not fpath.exists():
+    file_exists = False
+    # Check if the path as listed exists
+    if fpath.exists():
+        file_exists = True
+    # Check the relative path to the current working directory
+    elif (Path(os.getcwd()) / fpath).exists():
+        file_exists = True
+        fpath = Path(os.getcwd()) / fpath
+    # Check the examples directory
+    elif (Path(shmoopy.__file__).parent / fpath).exists():
+        file_exists = True
+        fpath = Path(shmoopy.__file__).parent / fpath
+    if not file_exists:
         raise TunableError(f'Path for tunable "{func_name}" does not exist: {fpath}')
-    return fpath
+
+    return str(fpath)
 
 
 def tunable_load_array(func=None, *, dtype=None):

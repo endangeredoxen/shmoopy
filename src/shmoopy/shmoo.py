@@ -11,6 +11,7 @@ __url__ = 'https://github.com/endangeredoxen/shmoopy'
 
 import pandas as pd
 import numpy as np
+import uuid
 from pathlib import Path
 from io import StringIO
 from typing import Union
@@ -77,6 +78,7 @@ def create_test_plan(csv_file: Union[str, StringIO, Path]) -> pd.DataFrame:
         array_rows = df[df[column].map(str).str.endswith('.arr')]
         if len(array_rows) > 0:
             for irow, row in array_rows.iterrows():
+                db()
                 if not Path(row[column]).exists():
                     raise FileNotFoundError(f'Array file does not exist: {row[column]}')
                 try:
@@ -134,7 +136,10 @@ def launch(
         raise TypeError('test_plan must be a pd.DataFrame, str, pathlib.Path, or StringIO object')
 
     # Validate tunables within the test plan
-    validate_tunables(test_plan, shmoo_instance)
+    test_plan = validate_tunables(test_plan, shmoo_instance)
+
+    # Add a unique identifier for the test to each row for tracking
+    test_plan['uuid'] = uuid.uuid1()
 
     # Get the metric methods from the ShmooClass
     metric_methods = utl.find_decorated_methods(shmoo_instance, '_metric')

@@ -1,10 +1,9 @@
 from typing import Callable, Optional
-import warnings
+import inspect
 import functools
 import pdb
 
 db = pdb.set_trace
-warnings.simplefilter('always', UserWarning)
 
 
 class MetricError(Exception):

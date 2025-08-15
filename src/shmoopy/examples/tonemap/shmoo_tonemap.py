@@ -1,4 +1,5 @@
 import cv2
+import os
 from shmoopy.tunables import *
 from shmoopy.metrics import metric
 from typing import Dict, Any
@@ -34,7 +35,7 @@ class ToneMapShmoo:
         """
         return value
 
-    @tunable_range(None, None)
+    @tunable_range(0, None)
     def gamma(self, value=1):
         """
         Used in all algorithms; gamma value for gamma correction
@@ -98,11 +99,22 @@ class ToneMapShmoo:
 
         # Apply the tone mapping algorithm
         if row.algorithm == 'drago':
-            tonemap = cv2.createTonemapDrago(bias=row.bias, saturation=row.saturation)
+            tonemap = cv2.createTonemapDrago(
+                bias=row.bias if hasattr(row, 'bias') else self.bias(),
+                saturation=row.saturation if hasattr(row, 'saturation') else self.saturation(),
+                gamma=float(row.gamma if hasattr(row, 'gamma') else self.gamma())
+            )
         elif row.algorithm == 'reinhard':
-            tonemap = cv2.createTonemapReinhard(color_adapt=row.color_adapt, intensity=row.intensity, gamma=row.gamma)
+            tonemap = cv2.createTonemapReinhard(
+                color_adapt=row.color_adapt if hasattr(row, 'color_adapt') else self.color_adapt(),
+                intensity=row.intensity if hasattr(row, 'intensity') else self.intensity(),
+                gamma=float(row.gamma if hasattr(row, 'gamma') else self.gamma())
+            )
         else:
-            tonemap = cv2.createTonemapMantiuk(scale=row.scale, gamma=row.gamma)
+            tonemap = cv2.createTonemapMantiuk(
+                scale=row.scale if hasattr(row, 'scale') else self.scale(),
+                gamma=float(row.gamma if hasattr(row, 'gamma') else self.gamma())
+            )
 
         # Apply the tonemap to the image
         ldr = tonemap.process(image_input)
@@ -112,11 +124,10 @@ class ToneMapShmoo:
 
         # Save the output image if required
         if self.save_images:
-            ##UPDATE TO ROW NUMBER
-            output_path = row['image_src'].with_suffix('.tonemapped.jpg')
-            cv2.imwrite(str(output_path), image_output)
+            output_path = Path(f'results_{row.uuid}')
+            if not os.path.exists(output_path):
+                os.makedirs(output_path)
+            cv2.imwrite(str(output_path / f'output_{irow}.jpg'), image_output)
 
         # Return all local variables for metric calculations
         return locals()
-
-

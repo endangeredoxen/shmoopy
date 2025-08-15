@@ -121,6 +121,7 @@ shmoopy/__pycache__/fcp.cpython-35.pyc
 # *.png
 
 #specific files
+results_*
 
 # other
 .vscode/settings.json
