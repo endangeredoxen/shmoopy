@@ -23,6 +23,6 @@ jobs:
     - name: Lint with flake8
       run: |
         flake8 src
-    - name: Plot tests
+    - name: Shmoopy tests
       run: |
         python -m pytest tests -s
