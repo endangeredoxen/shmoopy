@@ -1,4 +1,4 @@
-from typing import Any, List, Union
+from typing import Any, Dict, List, Union
 from pathlib import Path
 import numpy as np
 import shmoopy
@@ -26,10 +26,11 @@ warnings.simplefilter('once', TunableWarning)
 
 def _handle_defaults(args, kwargs, func):
     # Check for "self"
+    mods = ['builtins', 'pathlib', 'numpy', 'pandas']
     is_default = False
-    if len(args) == 2 and hasattr(args[0], '__class__'):
+    if len(args) == 2 and not any(mod in str(inspect.getmodule(args[0].__class__)) for mod in mods):
         value = args[1]
-    elif len(args) == 1 and not hasattr(args[0], '__class__'):
+    elif len(args) == 1 and any(mod in str(inspect.getmodule(args[0].__class__)) for mod in mods):
         value = args[0]
     else:
         # Get the default value from the decorated function's signature
@@ -84,7 +85,7 @@ def tunable_load_array(func=None, *, dtype=None):
                 # ignore path check and just use default
                 return value
             fname = func.__name__
-            fpath = _validate_path(value, fname)
+            fpath = Path(_validate_path(value, fname))
             if not fpath.is_file():
                 raise TunableError(f'Path for tunable "{fname}" is not a file: {fpath}')
             try:
@@ -173,3 +174,37 @@ def tunable_values(values: List[Any]):
         wrapper._tunable = True
         return wrapper
     return decorator
+
+
+def validate_from_override(tunable: str, value: Any, override: Dict[str, Any]) -> Any:
+    """
+    Validate a tunable parameter based on and override dictionay
+
+    Args:
+        tunable: name of the tunable
+        value: value to check
+        override: dictionary of limits to check
+
+    Returns:
+        validated value
+    """
+    # Case @tunable_range
+    if 'min' in override or 'max' in override:
+        if 'min' in override and value < override['min']:
+            raise TunableError(f'Value for tunable "{tunable}" must be greater than or equal to {override["min"]} '
+                               '(per override)')
+        if 'max' in override and value > override['max']:
+            raise TunableError(f'Value for tunable "{tunable}" must be less than or equal to {override["max"]} '
+                               '(per override)')
+
+    # Case @tunable_values
+    elif 'values' in override:
+        if value not in override['values']:
+            valid = [f"'{item}'" if isinstance(item, str) else str(item) for item in override["values"]]
+            raise TunableError(f'Value of "{value}" is not allowed for tunable "{tunable}"; allowed options '
+                               f'are: [{", ".join(valid)}] (per override)')
+
+    else:
+        raise TunableError(f'Override for "{tunable}" is malformatted; please try again')
+
+    return value

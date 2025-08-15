@@ -53,11 +53,11 @@ def test_tunable_path():
 
     # Working case with Path
     values = test_values(CUR_DIR / DATA)
-    assert values == (CUR_DIR / DATA)
+    assert Path(values) == (CUR_DIR / DATA)
 
     # Working case with str
     values = test_values(str(CUR_DIR / DATA))
-    assert values == (CUR_DIR / DATA)
+    assert Path(values) == (CUR_DIR / DATA)
 
     # File doesn't exist
     with pytest.raises(shmoopy.TunableError) as error:

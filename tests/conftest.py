@@ -1,11 +1,23 @@
 import pytest
 import shmoopy
-from shmoo_tonemap import ToneMapShmoo
+from shmoopy.examples.tonemap import ToneMapShmoo
 from pathlib import Path
 
 
+TONEMAP_PATH  = Path(shmoopy.examples.tonemap.__file__).parent
+
+
 @pytest.fixture(scope="session")
-def test_shmoo():
+def tonemap_shmoo():
     shmoo = ToneMapShmoo()
     yield shmoo  # Yield the instance to the tests
-    shmoo.cleanup() # Teardown logic after tests
+
+
+@pytest.fixture(scope="session")
+def csv_gamma_only():
+    yield TONEMAP_PATH / 'gamma_only.csv'
+
+
+@pytest.fixture(scope="session")
+def csv_multiple():
+    yield TONEMAP_PATH / 'multiple.csv'
