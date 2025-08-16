@@ -1,0 +1,4 @@
+Magic syntax
+============
+
+Coming soon!
