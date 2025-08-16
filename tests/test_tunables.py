@@ -129,7 +129,8 @@ def test_tunable_range():
         return value
 
     # Catch warning for no min or max
-    with pytest.warns(UserWarning, match='Tunable range for "test_values" lacks a min or a max and is thus pointless'):
+    with pytest.warns(shmoopy.TunableWarning,
+                      match='Tunable range for "test_values" lacks a min or a max and is thus pointless'):
         assert test_values(5) == 5
 
 

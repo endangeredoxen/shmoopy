@@ -80,7 +80,7 @@ def create_test_plan(csv_file: Union[str, StringIO, Path]) -> pd.DataFrame:
         array_rows = df[df[column].map(str).str.endswith('.arr')]
         if len(array_rows) > 0:
             for irow, row in array_rows.iterrows():
-                df.at[irow, column] = ' '.join([str(f) for f in values])
+                df.at[irow, column] = tunables.tunable_load_array_no_decorator(row[column])
 
         # Make a note of copy columns to minimize looping
         if len(df[df[column].map(str).str.contains(r'^\$.*\$$', na=False)]) > 0:
@@ -106,13 +106,18 @@ def create_test_plan(csv_file: Union[str, StringIO, Path]) -> pd.DataFrame:
 
 
 def fix_dtype(df: pd.DataFrame, column: str) -> pd.DataFrame:
-    # Fix data types
-    df[column] = df[column].replace('nan', np.nan)
-    if utl.can_convert_to_int(df[column]):
-        df[column] = df[column].astype('float64').astype('Int64')
-    elif utl.can_convert_to_float(df[column]):
-        df[column] = df[column].astype('float64')
+    """
+    Attept to correct DataFrame column values data types
 
+    Args:
+        df: input DataFrame
+        column: name of the current column
+
+    Returns:
+        updated DataFrame
+    """
+
+    df[column] = utl.convert_numeric(df[column].replace('nan', np.nan))
     return df
 
 

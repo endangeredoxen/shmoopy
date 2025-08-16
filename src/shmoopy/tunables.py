@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Union
+from typing import Any, Callable, Dict, List, Tuple, Union
 from pathlib import Path
 import numpy as np
 import shmoopy
@@ -24,29 +24,46 @@ class TunableWarning(Warning):
 warnings.simplefilter('once', TunableWarning)
 
 
-def _handle_defaults(args, kwargs, func):
-    # Check for "self"
-    mods = ['builtins', 'pathlib', 'numpy', 'pandas']
-    is_default = False
-    if len(args) == 2 and not any(mod in str(inspect.getmodule(args[0].__class__)) for mod in mods):
-        value = args[1]
-    elif len(args) == 1 and any(mod in str(inspect.getmodule(args[0].__class__)) for mod in mods):
-        value = args[0]
+def _handle_defaults(args: Tuple[Any, ...], kwargs: dict, func: Callable) -> Tuple[Any, bool]:
+    """
+    Handles tunable function arguments to retrieve the value and determine if it's a default.
+
+    This function is designed to work with both standalone functions and class methods.
+    It checks the function's signature to correctly extract the 'value' argument.
+    """
+    sig = inspect.signature(func)
+    params = list(sig.parameters.keys())
+
+    # Determine if the function is a method by checking for 'self' as the first parameter
+    is_method = params and params[0] == 'self'
+
+    # The index of the 'value' parameter in the positional arguments list
+    value_index = 1 if is_method else 0
+
+    # Case 1: 'value' is provided as a positional argument
+    if len(args) > value_index:
+        value = args[value_index]
+        is_default = False
+    # Case 2: 'value' is provided as a keyword argument
+    elif 'value' in kwargs:
+        value = kwargs['value']
+        is_default = False
+    # Case 3: Use the default value from the function signature
     else:
-        # Get the default value from the decorated function's signature
-        sig = inspect.signature(func)
         if 'value' in sig.parameters and sig.parameters['value'].default is not inspect.Parameter.empty:
             value = sig.parameters['value'].default
+            is_default = True
         else:
-            raise TunableError('Tunable validation function requires a "value"')
-        is_default = True
+            # This handles cases where 'value' isn't provided and has no default
+            raise TunableError('Tunable validation function requires a "value" argument or a default value')
+
     return value, is_default
 
 
 def _validate_path(value, func_name):
     """Helper function to validate and return a Path object"""
     if isinstance(value, str):
-        fpath = Path(value)  # Fixed: was fpath(value)
+        fpath = Path(value)
     elif isinstance(value, Path):
         fpath = value
     else:
@@ -102,6 +119,24 @@ def tunable_load_array(func=None, *, dtype=None):
         return decorator(func)
 
 
+def tunable_load_array_no_decorator(value, dtype=None):
+    """
+    Read a list of values for a tunable from file after checking the fpath is valid
+
+    Returns:
+        values from file as numpy array
+    """
+    fname = ''
+    fpath = Path(_validate_path(value, fname))
+    if not fpath.is_file():
+        raise TunableError(f'Path for tunable "{fname}" is not a file: {fpath}')
+    try:
+        values = np.loadtxt(fpath, dtype=dtype)
+    except ValueError:
+        raise TunableError(f'Could not load array from file "{fpath}" for tunable "{fname}"')
+    return ' '.join([str(f) for f in values])
+
+
 def tunable_path(func):
     """
     Ensure a tunable value that represents a fpath exists
@@ -139,7 +174,7 @@ def tunable_range(min_value: Union[int, float, None], max_value: Union[int, floa
                 return value
             fname = func.__name__
             if min_value is None and max_value is None:
-                warnings.warn(f'Tunable range for "{fname}" lacks a min or a max and is thus pointless')
+                warnings.warn(f'Tunable range for "{fname}" lacks a min or a max and is thus pointless', TunableWarning)
             elif min_value is None and value > max_value:
                 raise TunableError(f'Value for tunable "{fname}" must be less than or equal to {max_value}')
             elif max_value is None and value < min_value:

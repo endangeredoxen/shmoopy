@@ -4,9 +4,10 @@ import pytest
 import shmoopy
 from io import StringIO
 import pandas as pd
+import numpy as np
+import numpy.testing as npt
 import os
 import pdb
-from pathlib import Path
 osjoin = os.path.join
 db = pdb.set_trace
 
@@ -32,15 +33,18 @@ def test_create_test_plan_stringio(csv_gamma_only):
 
 
 def test_create_test_plan_bad_path():
-    with pytest.raises(FileNotFoundError) as error:
-        csv = shmoopy.create_test_plan('hi.csv')
+    with pytest.raises(FileNotFoundError):
+        shmoopy.create_test_plan('hi.csv')
+
 
 def test_create_test_plan_bad_path2():
-    with pytest.raises(TypeError) as error:
-        csv = shmoopy.create_test_plan(2)
+    with pytest.raises(TypeError):
+        shmoopy.create_test_plan(2)
 
 
 def test_create_test_plan_magic_syntax(csv_multiple):
     csv = shmoopy.create_test_plan(csv_multiple)
 
     assert len(csv) == 21
+    npt.assert_array_equal(pd.unique(csv.loc[csv.algorithm == 'mantiuk', 'scale']),
+                           np.array([0.2, 0.7, 1.1]))

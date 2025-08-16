@@ -4,8 +4,6 @@ import numpy as np
 import numpy.testing as npt
 from shmoopy.metrics import metric
 from shmoopy.examples.tonemap import ToneMapShmoo
-from io import StringIO
-import pandas as pd
 import os
 from types import MethodType
 import pdb
@@ -14,7 +12,7 @@ osjoin = os.path.join
 db = pdb.set_trace
 
 
-TONEMAP_PATH  = Path(shmoopy.examples.tonemap.__file__).parent
+TONEMAP_PATH = Path(shmoopy.examples.tonemap.__file__).parent
 
 
 def test_shmoo_simple(tonemap_shmoo, csv_gamma_only):
@@ -72,5 +70,3 @@ def test_shmoo_override_by_dict(tonemap_shmoo, csv_gamma_only):
         shmoopy.launch(tonemap_shmoo, csv_gamma_only, tunable_overrides={'algorithm': {'values': ['hi']}})
     assert '"drago" is not allowed for tunable "algorithm"; allowed options are: [\'hi\'] (per override)' \
         in str(error.value)
-
-

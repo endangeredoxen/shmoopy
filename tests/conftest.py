@@ -4,7 +4,7 @@ from shmoopy.examples.tonemap import ToneMapShmoo
 from pathlib import Path
 
 
-TONEMAP_PATH  = Path(shmoopy.examples.tonemap.__file__).parent
+TONEMAP_PATH = Path(shmoopy.examples.tonemap.__file__).parent
 
 
 @pytest.fixture(scope="session")
