@@ -1,0 +1,540 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" data-theme="dark">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>shmoopy &#8212; shmoopy</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "dark";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "dark";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <link rel="shortcut icon" href="_static/shmoo.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Magic syntax" href="magic_syntax.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Aug 16, 2025"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="dark">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="_static/shmoo.png" class="logo__image only-dark" alt=""/>
+    <script>document.write(`<img src="_static/shmoo.png" class="logo__image only-light" alt=""/>`);</script>
+  
+  
+    <p class="title logo__title">shmoopy</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="magic_syntax.html">
+    Magic syntax
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/endangeredoxen/shmoopy" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="magic_syntax.html">
+    Magic syntax
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="changelog.html">
+    Changelog
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/endangeredoxen/shmoopy" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="section" id="shmoopy">
+<h1>shmoopy<a class="headerlink" href="#shmoopy" title="Permalink to this heading">#</a></h1>
+<p>Obscured from the modern memory by the incessant, boisterous onslaught of the Marvel Cinematic and DC Extended Universes, is another 1940s comic book hero, conceived with the primary objective of fulfilling all of humanity’s wants and needs:  Al Capp’s “The Shmoo”.</p>
+<p>Though most have forgotten this plump, bowling-pin-shaped embodiement of generosity that tastes like chicken when broiled, a small fellowship of devoted scientists and engineers have endeavoured to keep the memory of “the shmoo” alive via the “shmoo plot”, a way to visualize a system’s performance over a range of operating conditions.  <cite>shmoopy</cite> honors those efforts by providing <em>a simple tool for iterating through (or “shmooing”) multiple tunable variables in order to identify a system’s best settings</em>.</p>
+<div class="section" id="components-of-a-shmoo">
+<h2>Components of a shmoo<a class="headerlink" href="#components-of-a-shmoo" title="Permalink to this heading">#</a></h2>
+<p>A shmoo experiment requires three things:</p>
+<ol class="arabic simple">
+<li><p>a csv file of “tunable” parameters (or knobs) to test for some system</p></li>
+<li><p>a custom python class with a “shmoo” method that performs all the steps to run the system under test with each set of tunable parameters</p></li>
+<li><p>“metric” methods that perform various calculations on the results of the system for later analysis</p></li>
+</ol>
+<div class="section" id="csv-file">
+<h3>CSV file<a class="headerlink" href="#csv-file" title="Permalink to this heading">#</a></h3>
+<p>The csv file is where tunable parameters for an experiment are defined.  Each row in the table represents a specific test condition in an overall test plan.  However, <cite>shmoopy</cite> makes the process of generating all permutations of multivariate tunable parameters easy with some syntax magic.  This means a user can define multiple test cases from within single cell in a single table row.  For example, consider the following csv file with only 1 row:</p>
+<p>This will be expanded by <cite>shmoopy</cite> to run the following:</p>
+</div>
+<div class="section" id="shmoo-class">
+<h3>Shmoo class<a class="headerlink" href="#shmoo-class" title="Permalink to this heading">#</a></h3>
+<p>The shmoo class is where the user defines the system under test.  In other words, all steps that are specific to your experiment and define what occurs based on the unique set of tunables defined in the csv are handled in this class.  A few notes about the shmoo class:</p>
+<ol class="arabic simple">
+<li><p>The shmoo class can contain anything you want, but at minimum must include the main execution function (called <cite>run</cite> by default)</p></li>
+</ol>
+<p>Your <cite>run</cite> function must accept the following input parameters and always returns a dictonary</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">irow</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</pre></div>
+</div>
+<p><cite>irow</cite> is the current row number of the csv table.  <cite>row</cite> is a <cite>NamedTuple</cite> that contains all of the tunable parameters in the current row, defined using the “.” style (i.e., <cite>row.tunableA</cite>)</p>
+<ol class="arabic simple" start="2">
+<li><p>To minimize the chance of a crash in a long experiment, <cite>shmoopy</cite> allows you to validate your tunable parameters before launching the shmoo.  Within your shmoo class you can create methods with the names of your tunable parameters (same as the column headers in the csv) and you can use special decorators to declare things like valid ranges, valid lists of values, etc.  If your table contains errors, <cite>shmoopy</cite> will raise an exception before beginning the test.</p></li>
+</ol>
+<p>Consider an image processing task with a tunable called <strong>saturation</strong> that can range from -8 to 8.  The following method in your shmoo class will validate your table value makes sense before launching.  As defined here, it will also provide a default value of 0 if this tunable is not defined in the csv.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@tunable_range</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">intensity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">   </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   Used in Reinhard algorithm; result intensity in [-8, 8] range. Greater intensity produces brighter results.</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="k">return</span> <span class="n">value</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Any other methods or attributes you need for your experiment are allowed and can be defined normally within your shmoo class</p></li>
+</ol>
+</div>
+<div class="section" id="metrics">
+<h3>Metrics<a class="headerlink" href="#metrics" title="Permalink to this heading">#</a></h3>
+<p>A shmoo is only useful if it computes something (or many somethings) for a given test case.  This is handled within the shmoo class by defining specific calculation methods with the <cite>&#64;metric</cite> decorator.  All metric methods (unless manually skipped) will run for each row and the computed value or values are added as new columns in the csv table.  When the shmoo completes, you are given a table where each row has the test conditions used and the metrics that were computed.</p>
+<p>In order for the metric function to have access to data from the <cite>run</cite> method, it is required that the <cite>run</cite> function <cite>return locals()</cite> (i.e., every variable defined within the <cite>run</cite> function) and accept a dictionary input.  The metric function must then return any calculations as a dictionary and <cite>shmoopy</cite> automatically adds these new values to the output table.</p>
+<p>For example, assume our shmoo class is doing some kind of image processing and we want to compute stats on the output image.  This can be achieved by adding the following method to the shmoo class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@metric</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate image statistics for the LDR output</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;image_output&#39;</span><span class="p">]),</span>
+        <span class="s1">&#39;std&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;image_output&#39;</span><span class="p">]),</span>
+        <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;image_output&#39;</span><span class="p">]),</span>
+        <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;image_output&#39;</span><span class="p">])</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shmoopy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">fivecentplots</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fcp</span>  <span class="c1"># for visualization</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shmoopy.examples.tonemap</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToneMapShmoo</span>
+</pre></div>
+</div>
+<p>Assume we have the following single-row csv of tunables for tone mapping of an high-dynamic range image:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">shmoopy</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s1">&#39;examples/tonemap/gamma_only.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is a simple sweep of the gamma parameter for 3 different tonemap methods.  When <cite>shmoopy</cite> builds the test plan, both the <cite>algorithm</cite> and the <cite>gamma</cite> cell values are expanded and we end up with 9 different test cases:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">shmoopy</span><span class="o">.</span><span class="n">create_test_plan</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">shmoopy</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s1">&#39;examples/tonemap/gamma_only.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can make an instance of our example shmoo class and run the shmoo as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tms</span> <span class="o">=</span> <span class="n">ToneMapShmoo</span><span class="p">(</span><span class="n">save_images</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># save_images is option in this shmoo class to save the tonemapped images</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">shmoopy</span><span class="o">.</span><span class="n">launch</span><span class="p">(</span><span class="n">tms</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="n">shmoopy</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s1">&#39;examples/tonemap/gamma_only.csv&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[[</span><span class="s1">&#39;algorithm&#39;</span><span class="p">,</span> <span class="s1">&#39;gamma&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fcp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;gamma&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s1">&#39;algorithm&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_static/images/output_18_0.png" src="_static/images/output_18_0.png" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">img_dir</span> <span class="o">=</span> <span class="s1">&#39;results_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">imgs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">irow</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+   <span class="n">img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">img_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;output_</span><span class="si">{</span><span class="n">irow</span><span class="si">}</span><span class="s1">.jpg&#39;</span><span class="p">)</span>
+   <span class="n">imgs</span><span class="p">[</span><span class="n">irow</span><span class="p">]</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+<span class="n">fcp</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">imgs</span><span class="o">=</span><span class="n">imgs</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;algorithm&#39;</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="s1">&#39;gamma&#39;</span><span class="p">,</span> <span class="n">share_z</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_static/images/output_19_0.png" src="_static/images/output_19_0.png" />
+</div>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="magic_syntax.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Magic syntax</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components-of-a-shmoo">Components of a shmoo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-file">CSV file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shmoo-class">Shmoo class</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metrics">Metrics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025-2025.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

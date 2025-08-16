@@ -1,4 +1,0 @@
-algorithm,bias,color_adapt,intensity,gamma,light_adapt,saturation,scale,image_src,skip_metric
-drago,0.2:1:10,,,0,,1.0,,examples/tonemap/cobblestone_street_night_1k.hdr,stats
-reinhard,,0.1 0.4,0.5,$color_adapt$,1,,,examples/tonemap/cobblestone_street_night_1k.hdr,
-mantiuk,,,,0.1:1:3:log,,1.2,examples/tonemap/scale_array.arr,examples/tonemap/cobblestone_street_night_1k.hdr,
